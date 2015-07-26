@@ -1,16 +1,15 @@
 #!/bin/sh
 
+
+J_INSTALL_DIR=/usr/lib/jvm/java-8-oracle
 URL=$(curl -s http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | \
     awk "/downloads\['/ && ! /demos/ && /\['files'\]/ && /linux-x64/ && /\.tar\.gz/" | \
     grep -o 'http.*\.tar\.gz') 
 
 AVAILABLE=$(echo $URL | grep -o -P 'jdk-8u.{0,2}' | cut -d "u" -f 2)
-CURRENT=$(java -version 2>&1 | awk '/version/ {print $3}' | cut -d_ -f 2 | tr -d '"')
+CURRENT=$("$J_INSTALL_DIR"/bin/java -version 2>&1 | awk '/version/ {print $3}' | cut -d_ -f 2 | tr -d '"')
 
 if [ -z $CURRENT ] || [ $AVAILABLE -gt $CURRENT ]; then
-
-	J_INSTALL_DIR=/usr/lib/jvm/java-8-oracle
-
 	cd /var/cache/oracle-jdk8-installer
 	rm -f jdk-8u"$CURRENT"-linux-x64.tar.gz
 	wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" $URL
