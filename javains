@@ -7,7 +7,9 @@ URL=$(curl -s http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downl
 AVAILABLE=$(echo $URL | grep -o -P 'jdk-8u.{0,2}' | cut -d "u" -f 2)
 CURRENT=$(java -version 2>&1 | awk '/version/ {print $3}' | cut -d_ -f 2 | tr -d '"')
 
-echo $AVAILABLE $CURRENT
+if [ $AVAILABLE -eq $CURRENT ]; then
+	echo "Java is up tp date"
+fi
 
 if [ -z $CURRENT ] || [ $AVAILABLE -gt $CURRENT ]; then
 
