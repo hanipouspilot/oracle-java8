@@ -23,7 +23,7 @@ if [ -z $CURRENT ] || [ $AVAILABLE -gt $CURRENT ]; then
 		LATEST=1
 	else
 		J_PATH=$(LANG=C update-alternatives --display java | grep "priority "$LATEST"" | awk '{print $1}')
-	[ $J_PATH = "$J_INSTALL_DIR"/jre/bin/java ] || LATEST=$((LATEST+1))
+		[ $J_PATH = "$J_INSTALL_DIR"/jre/bin/java ] || LATEST=$((LATEST+1))
 	fi	
 	
 	#link JRE files
