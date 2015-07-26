@@ -34,11 +34,10 @@ if [ -z $CURRENT ] || [ $AVAILABLE -gt $CURRENT ]; then
 						
 				update-alternatives --install /usr/bin/$name $name $J_INSTALL_DIR/jre/bin/$name $LATEST --slave /usr/share/man/man1/$name.1.gz $name.1.gz $J_INSTALL_DIR/man/man1/$name.1.gz
 			fi
-		else #no man pages available
-	            # [ ! $name = "javaws.real" ] = skip javaws.real     
-	    	[ ! $name = "javaws.real" ] && update-alternatives --install /usr/bin/$name $name $J_INSTALL_DIR/jre/bin/$name $LATEST
+		else     
+	    		update-alternatives --install /usr/bin/$name $name $J_INSTALL_DIR/jre/bin/$name $LATEST
 	    	
-	    fi
+	    	fi
 	done
 
 	echo "Oracle Java 8 installed"
