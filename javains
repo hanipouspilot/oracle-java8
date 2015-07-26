@@ -8,7 +8,7 @@ AVAILABLE=$(echo $URL | grep -o -P 'jdk-8u.{0,2}' | cut -d "u" -f 2)
 CURRENT=$(java -version 2>&1 | awk '/version/ {print $3}' | cut -d_ -f 2 | tr -d '"')
 
 if [ $AVAILABLE -eq $CURRENT ]; then
-	echo "Java is up tp date"
+	echo "Java is up to date"
 fi
 
 if [ -z $CURRENT ] || [ $AVAILABLE -gt $CURRENT ]; then
